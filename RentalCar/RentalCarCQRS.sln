@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCar", "RentalCar.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCar.Domain", "..\RentalCar.Models\RentalCar.Domain.csproj", "{29BB3F3F-3B6A-429B-8D5C-68871714914D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentalCar.Domain", "RentalCar.Domain", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DF18F517-744C-4A6A-9452-220A65A8CBA9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentalCarCQRS.Infrastructure", "RentalCarCQRS.Infrastructure", "{DF18F517-744C-4A6A-9452-220A65A8CBA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCar.Persistence", "..\RentalCar.Persistence\RentalCar.Persistence.csproj", "{B12AB817-965B-4411-86D1-24250B1EAAD1}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCar.Persistence", "..
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCar.Application", "..\RentalCar.Application\RentalCar.Application.csproj", "{1BE9B1A6-510A-4C51-8234-C5968BF8C6CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentalCarCQRS.Api", "RentalCarCQRS.Api", "{FBC2A9C9-18A9-4FEF-AA74-FA3DB0D4C4FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentalCar.Application", "RentalCar.Application", "{2AC8B7A2-8F43-4798-BD32-AFF7E6E0A529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,9 +53,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{66E65F74-B4EA-4EF7-93F3-1C2809875E72} = {FBC2A9C9-18A9-4FEF-AA74-FA3DB0D4C4FD}
 		{29BB3F3F-3B6A-429B-8D5C-68871714914D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B12AB817-965B-4411-86D1-24250B1EAAD1} = {DF18F517-744C-4A6A-9452-220A65A8CBA9}
-		{1BE9B1A6-510A-4C51-8234-C5968BF8C6CF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1BE9B1A6-510A-4C51-8234-C5968BF8C6CF} = {2AC8B7A2-8F43-4798-BD32-AFF7E6E0A529}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F82A1F03-537C-4406-B641-A0906A1599A5}

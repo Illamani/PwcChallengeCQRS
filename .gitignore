@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/PwcChallenge/v17
+/.vs
+/RentalCar/.vs
+/RentalCar/obj
+/RentalCar/bin/Debug/net8.0
+/RentalCar.Models/obj
+/RentalCar.Models/bin/Debug/net8.0
+/RentalCar/.vs/ProjectEvaluation
+/RentalCar.Persistence/obj/Debug/net8.0
+/RentalCar.Persistence/obj
+/RentalCar.Persistence/bin/Debug/net8.0
+/RentalCar.Application/obj/Debug/net8.0
+/RentalCar.Application/obj
+/RentalCar.Application/bin
+/RentalCar.Application/bin/Debug/net8.0
+
