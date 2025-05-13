@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RentalCar.Application;
 using RentalCar.Persistence;
 using RentalCar.Persistence.Context;
 
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryEntryPointMediatr).Assembly));
 
 builder.Services.ConfigurePersistence(builder.Configuration);
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using RentalCar.Application.Features.CarFeatures.Get;
 using RentalCar.Application.Service;
 using RentalCar.Domain;
 using RentalCar.Domain.Dto;
@@ -8,9 +10,10 @@ namespace RentalCar.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarController(ICarService carService) : ControllerBase
+    public class CarController(ICarService carService, IMediator mediator) : ControllerBase
     {
         private readonly CarMapper _mapper = new();
+        private readonly IMediator _mediator = mediator;
 
         [HttpPost]
         [Route("CreateCar")]
@@ -23,7 +26,7 @@ namespace RentalCar.Controllers
         [Route("GetAllCar")]
         public async Task<List<CarDto>> GetCarsAsync(CancellationToken cancellationToken)
         {
-            var cars = await carService.GetAll(cancellationToken);
+            var cars = await _mediator.Send(new GetAllCarRequest(), cancellationToken);
             return _mapper.CarsToCarsDto(cars);
         }
 
