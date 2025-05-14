@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using RentalCar.Application.Repository.ModelRepository;
-using RentalCar.Domain.Dto;
 using RentalCar.Domain.Entities;
 
 namespace RentalCar.Application.Features.CarFeatures.Get

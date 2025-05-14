@@ -34,7 +34,7 @@ namespace RentalCar.Controllers
         [Route("GetCar")]
         public async Task<CarDto> GetCarAsync(int id, CancellationToken cancellationToken)
         {
-            var car = await carService.Get(id, cancellationToken);
+            var car = await _mediator.Send(new GetCarRequest(id), cancellationToken);
             return _mapper.CarToCarDto(car);
         }
 
