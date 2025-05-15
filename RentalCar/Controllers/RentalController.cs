@@ -1,48 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RentalCar.Application.Service;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using RentalCar.Application.Features.RentalFeatures.Add;
+using RentalCar.Application.Features.RentalFeatures.Get;
 using RentalCar.Domain.Dto;
 using RentalCar.Domain.Entities;
 using RentalCar.Domain.Mapper;
 
-namespace RentalCar.Controllers
+namespace RentalCar.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class RentalController(IMediator mediator) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RentalController(IRentalService rentalService) : ControllerBase
+    private readonly RentalMapper _mapper = new();
+    private readonly IMediator _mediator = mediator;
+
+    [HttpGet]
+    [Route("Get")]
+    public async Task<RentalDto> GetAsync(int id, CancellationToken cancellationToken)
     {
-        private readonly RentalMapper _mapper = new();
+        var rental = await _mediator.Send(new GetRentalRequest(id), cancellationToken);
+        return _mapper.RentalToRentalDto(rental);
+    }
 
-        [HttpGet]
-        [Route("Get")]
-        public async Task<RentalDto> Get(int id, CancellationToken cancellationToken)
-        {
-            var rental = await rentalService.Get(id, cancellationToken);
-            return _mapper.RentalToRentalDto(rental);
-        }
+    [HttpGet("GetAll")]
+    public async Task<List<RentalDto>> GetAll(CancellationToken cancellationToken)
+    {
+        var rentals = await _mediator.Send(new GetAllRentalRequest(), cancellationToken);
+        return _mapper.RentalsToRentalDtos(rentals);
+    }
 
-        [HttpGet("GetAll")]
-        public async Task<List<RentalDto>> GetAll(CancellationToken cancellationToken)
-        {
-            var rentals = await rentalService.GetAll(cancellationToken);
-            return _mapper.RentalsToRentalDtos(rentals);
-        }
+    [HttpDelete("Delete")]
+    public async Task<RentalDto> DeleteAsync(Rental rental, CancellationToken cancellationToken)
+    {
+        var rentals = await _mediator.Send(new RemoveRentalRequest(rental), cancellationToken);
+        return _mapper.RentalToRentalDto(rentals);
+    }
 
-        [HttpDelete("Delete")]
-        public void Delete(Rental rental)
-        {
-            rentalService.Delete(rental);
-        }
+    [HttpPut("Update")]
+    public async Task<RentalDto> UpdateAsync(Rental rental, CancellationToken cancellationToken)
+    {
+        var rentals = await _mediator.Send(new UpdateRentalRequest(rental), cancellationToken);
+        return _mapper.RentalToRentalDto(rentals);
+    }
 
-        [HttpPut("Update")]
-        public void Update(Rental rental)
-        {
-            rentalService.Update(rental);
-        }
-
-        [HttpPost("Create")]
-        public void Create(Rental rental)
-        {
-            rentalService.Create(rental);
-        }
+    [HttpPost("Create")]
+    public async Task<RentalDto> CreateAsync(Rental rental, CancellationToken cancellationToken)
+    {
+        var rentals = await _mediator.Send(new AddRentalRequest(rental), cancellationToken);
+        return _mapper.RentalToRentalDto(rentals);
     }
 }

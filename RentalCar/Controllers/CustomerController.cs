@@ -1,54 +1,57 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RentalCar.Application.Service;
+using RentalCar.Application.Features.CustomerFeatures.Add;
+using RentalCar.Application.Features.CustomerFeatures.Get;
 using RentalCar.Domain.Dto;
 using RentalCar.Domain.Entities;
 using RentalCar.Domain.Mapper;
 
-namespace RentalCar.Controllers
+namespace RentalCar.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CustomerController(IMediator mediator) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CustomerController(ICustomerService _customerService, IMediator mediator) : ControllerBase
+    private readonly CustomerMapper _mapper = new();
+    private readonly IMediator _mediator = mediator;
+
+    [HttpGet]
+    [Route("Get")]
+    public async Task<CustomerDto> GetAsync(int id, CancellationToken cancellationToken)
     {
-        private readonly CustomerMapper _mapper = new();
-        private readonly IMediator _mediator = mediator;
+        var customer = await _mediator.Send(new GetCustomerRequest(id), cancellationToken);
+        return _mapper.CustomerToCustomerDto(customer);
+    }
 
-        [HttpGet]
-        [Route("Get")]
-        public async Task<CustomerDto> Get(int id, CancellationToken cancellationToken)
-        {
-            var customer = await _customerService.Get(id, cancellationToken);
-            return _mapper.CustomerToCustomerDto(customer);
-        }
+    [HttpGet]
+    [Route("GetAll")]
+    public async Task<List<CustomerDto>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        var customers = await _mediator.Send(new GetAllCustomerRequest(), cancellationToken);
+        return _mapper.CustomersToCustomerDtos(customers);
+    }
 
-        [HttpGet]
-        [Route("GetAll")]
-        public async Task<List<CustomerDto>> GetAll(CancellationToken cancellationToken)
-        {
-            var customers = await _customerService.GetAll(cancellationToken);
-            return _mapper.CustomersToCustomerDtos(customers);
-        }
+    [HttpPost]
+    [Route("Create")]
+    public async Task<CustomerDto> CreateAsync(Customer customer, CancellationToken cancellationToken)
+    {
+        var customers = await _mediator.Send(new AddCustomerRequest(customer),cancellationToken);
+        return _mapper.CustomerToCustomerDto(customers);
+    }
 
-        [HttpPost]
-        [Route("Create")]
-        public void Create(Customer customer)
-        {
-            _customerService.Create(customer);
-        }
+    [HttpPut]
+    [Route("Update")]
+    public async Task<CustomerDto> UpdateAsync(Customer customer, CancellationToken cancellationToken)
+    {
+        var customers = await _mediator.Send(new UpdateCustomerRequest(customer), cancellationToken);
+        return _mapper.CustomerToCustomerDto(customers);
+    }
 
-        [HttpPut]
-        [Route("Update")]
-        public void Update(Customer customer)
-        {
-            _customerService.Update(customer);
-        }
-
-        [HttpDelete]
-        [Route("Delete")]
-        public void Delete(Customer customer)
-        {
-            _customerService.Delete(customer);
-        }
+    [HttpDelete]
+    [Route("Delete")]
+    public async Task<CustomerDto> DeleteAsync(Customer customer, CancellationToken cancellationToken)
+    {
+        var customers = await _mediator.Send(new RemoveCarRequest(customer), cancellationToken);
+        return _mapper.CustomerToCustomerDto(customers);
     }
 }
