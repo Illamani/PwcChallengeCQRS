@@ -9,7 +9,7 @@ namespace RentalCar.Application.Features.CarFeatures.Get
 		private readonly ICarRepository _carRepository = carRepository;
 		public Task<Car> Handle(GetCarRequest request, CancellationToken cancellationToken)
 		{
-			return _carRepository.Get(request.Id, cancellationToken);
+			return _carRepository.GetAsync(request.Id, cancellationToken);
 		}
 	}
 }

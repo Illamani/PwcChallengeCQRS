@@ -10,8 +10,11 @@ namespace RentalCar.Application.Repository
 
 		void Delete(T entity);
 
-		Task<T> Get(int id, CancellationToken cancellationToken);
+		Task<T> GetAsync(int id, CancellationToken cancellationToken);
 
-		Task<List<T>> GetAll(CancellationToken cancellationToken);
+		Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
+		Task CreateAsync(T entity, CancellationToken cancellationToken);
+		Task DeleteAsync(T entity, CancellationToken cancellationToken);
+		Task UpdateAsync(T entity, CancellationToken cancellationToken);
 	}
 }

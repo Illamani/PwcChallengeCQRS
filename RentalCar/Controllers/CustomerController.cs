@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using RentalCar.Application.Service;
 using RentalCar.Domain.Dto;
 using RentalCar.Domain.Entities;
@@ -8,9 +9,10 @@ namespace RentalCar.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController(ICustomerService _customerService) : ControllerBase
+    public class CustomerController(ICustomerService _customerService, IMediator mediator) : ControllerBase
     {
         private readonly CustomerMapper _mapper = new();
+        private readonly IMediator _mediator = mediator;
 
         [HttpGet]
         [Route("Get")]

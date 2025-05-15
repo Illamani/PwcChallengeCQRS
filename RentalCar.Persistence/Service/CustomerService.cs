@@ -23,12 +23,12 @@ namespace RentalCar.Persistence.Service
 
 		public Task<Customer> Get(int id, CancellationToken cancellationToken)
 		{
-			return _customerRepository.Get(id, cancellationToken);
+			return _customerRepository.GetAsync(id, cancellationToken);
 		}
 
 		public Task<List<Customer>> GetAll(CancellationToken cancellationToken)
 		{
-			return _customerRepository.GetAll(cancellationToken);
+			return _customerRepository.GetAllAsync(cancellationToken);
 		}
 	}
 }
