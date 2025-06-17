@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Carter;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentalCar.Application.Features.RentalFeatures.Add;
 using RentalCar.Application.Features.RentalFeatures.Get;
@@ -6,15 +7,15 @@ using RentalCar.Domain.Entities;
 
 namespace RentalCar.Api.Controllers;
 
-public static class RentalEndpoint
+public  class RentalEndpoint : ICarterModule
 {
-    public static void MapRentalEndpoints(this IEndpointRouteBuilder builder)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        builder.MapPost("api/CreateRental", CreateAsync);
-        builder.MapGet("api/GetAllRentals", GetAllAsync);
-        builder.MapGet("api/GetRental", GetAsync);
-        builder.MapDelete("api/DeleteRental", DeleteAsync);
-        builder.MapPut("api/UpdateRental", UpdateAsync);
+        app.MapPost("api/CreateRental", CreateAsync);
+        app.MapGet("api/GetAllRentals", GetAllAsync);
+        app.MapGet("api/GetRental", GetAsync);
+        app.MapDelete("api/DeleteRental", DeleteAsync);
+        app.MapPut("api/UpdateRental", UpdateAsync);
     }
 
     public static async Task<IResult> CreateAsync([FromBody] Rental rental, ISender sender, CancellationToken cancellationToken)

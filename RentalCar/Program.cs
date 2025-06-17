@@ -1,3 +1,4 @@
+using Carter;
 using Microsoft.EntityFrameworkCore;
 using RentalCar.Api.Controllers;
 using RentalCar.Application;
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCarter();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryEntryPointMediatr).Assembly));
 
@@ -38,13 +41,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapCarEndpoints();
-
-app.MapCustomerEndpoints();
-
-app.MapRentalEndpoints();
-
-app.MapServiceEndpoints();
+app.MapCarter();
 
 app.MapControllers();
 

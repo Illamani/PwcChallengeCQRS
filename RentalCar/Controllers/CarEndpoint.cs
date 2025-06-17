@@ -1,12 +1,23 @@
-﻿using MediatR;
+﻿using Carter;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentalCar.Application.Features.CarFeatures.Add;
 using RentalCar.Application.Features.CarFeatures.Get;
 using RentalCar.Domain.Entities;
 
 namespace RentalCar.Api.Controllers;
-public static class CarEndpoints
+public class CarEndpoints : ICarterModule
 {
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapPost("api/CreateCar", CreateCarAsync);
+        app.MapGet("api/GetAllCar", GetCarsAsync);
+        app.MapGet("api/GetCar", GetCarAsync);
+        app.MapDelete("api/DeleteCar", DeleteCarAsync);
+        app.MapPut("api/UpdateCar", UpdateCarAsync);
+    }
+
+    /*
     public static void MapCarEndpoints(this IEndpointRouteBuilder builder)
     {
         builder.MapPost( "api/CreateCar", CreateCarAsync);
@@ -22,7 +33,7 @@ public static class CarEndpoints
         builder.MapDelete("api/DeleteCar", DeleteCarAsync);
         builder.MapPut("api/UpdateCar", UpdateCarAsync);
     }
-
+    */
     public static async Task<IResult> CreateCarAsync([FromBody] Car car, ISender sender, CancellationToken cancellationToken)
     {
         var carReturn = await sender.Send(new AddCarRequest(car), cancellationToken);
