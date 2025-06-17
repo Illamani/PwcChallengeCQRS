@@ -42,6 +42,10 @@ app.MapCarEndpoints();
 
 app.MapCustomerEndpoints();
 
+app.MapRentalEndpoints();
+
+app.MapServiceEndpoints();
+
 app.MapControllers();
 
 app.Run();
