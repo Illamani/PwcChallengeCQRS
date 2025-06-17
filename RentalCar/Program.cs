@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RentalCar.Api.Controllers;
 using RentalCar.Application;
 using RentalCar.Persistence;
 using RentalCar.Persistence.Context;
@@ -36,6 +37,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapProductEndpoints();
 
 app.MapControllers();
 
