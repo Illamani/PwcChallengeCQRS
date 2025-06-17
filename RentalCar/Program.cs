@@ -38,7 +38,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapProductEndpoints();
+app.MapCarEndpoints();
+
+app.MapCustomerEndpoints();
 
 app.MapControllers();
 
