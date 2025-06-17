@@ -1,9 +1,9 @@
-﻿namespace RentalCar.Domain.Dto
-{
-	public class CarDto
-	{
-		public int Id { get; set; }
+﻿using RentalCar.Domain.Common;
 
+namespace RentalCar.Domain.Dto
+{
+	public class CarDto : BaseEntityDto
+	{
 		public int ServiceId { get; set; }
 
 		public string Type { get; set; }

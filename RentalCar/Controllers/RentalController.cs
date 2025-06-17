@@ -24,7 +24,7 @@ public class RentalController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetAll")]
-    public async Task<List<RentalDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<RentalDto>> GetAllAsync(CancellationToken cancellationToken)
     {
         var rentals = await _mediator.Send(new GetAllRentalRequest(), cancellationToken);
         return _mapper.RentalsToRentalDtos(rentals);
