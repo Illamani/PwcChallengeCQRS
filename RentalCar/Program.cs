@@ -1,6 +1,6 @@
 using Carter;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using RentalCar.Api.Controllers;
 using RentalCar.Application;
 using RentalCar.Persistence;
 using RentalCar.Persistence.Context;
@@ -36,6 +36,26 @@ if (app.Environment.IsDevelopment())
 
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(appError =>
+{
+    appError.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature is not null)
+        {
+            Console.WriteLine($"Error : {contextFeature.Error}");
+            await context.Response.WriteAsJsonAsync(new
+            {
+                StatusCode = context.Response.StatusCode,
+                Message = "Internal Server Error"
+            });
+        }
+    });
+});
 
 app.UseHttpsRedirection();
 
