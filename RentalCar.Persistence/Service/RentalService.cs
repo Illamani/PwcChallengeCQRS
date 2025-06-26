@@ -1,24 +1,24 @@
-﻿using RentalCar.Application.Repository.ModelRepository;
-using RentalCar.Application.Service;
+﻿using RentalCar.Application.Abstractions.Repository.ModelRepository;
+using RentalCar.Application.Abstractions.Service;
 using RentalCar.Domain.Entities;
 
 namespace RentalCar.Persistence.Service
 {
 	public class RentalService(IRentalRepository _rentalRepository) : IRentalService
 	{
-		public void Create(Rental rental)
+		public async Task CreateAsync(Rental rental, CancellationToken cancellationToken)
 		{
-			_rentalRepository.Create(rental);
+			await _rentalRepository.CreateAsync(rental, cancellationToken);
 		}
 
-		public void Update(Rental rental)
+		public async Task UpdateAsync(Rental rental, CancellationToken cancellationToken)
 		{
-			_rentalRepository.Update(rental);
+			await _rentalRepository.CreateAsync(rental, cancellationToken);
 		}
 
-		public void Delete(Rental rental)
+		public async Task DeleteAsync(Rental rental, CancellationToken cancellationToken)
 		{
-			_rentalRepository.Delete(rental);
+			await _rentalRepository.DeleteAsync(rental, cancellationToken);
 		}
 
 		public Task<Rental> Get(int id, CancellationToken cancellationToken)

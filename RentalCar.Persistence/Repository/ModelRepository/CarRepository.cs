@@ -1,4 +1,4 @@
-﻿using RentalCar.Application.Repository.ModelRepository;
+﻿using RentalCar.Application.Abstractions.Repository.ModelRepository;
 using RentalCar.Domain.Entities;
 using RentalCar.Persistence.Context;
 

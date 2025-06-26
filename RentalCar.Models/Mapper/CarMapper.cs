@@ -1,4 +1,4 @@
-﻿using RentalCar.Domain.Dto;
+﻿using RentalCar.Domain.Dto.Car;
 using RentalCar.Domain.Entities;
 using Riok.Mapperly.Abstractions;
 
@@ -14,5 +14,13 @@ namespace RentalCar.Domain
 		public partial Car CarDtoToCar (CarDto car);
 
 		public partial List<Car> CarsDtoToCars (List<CarDto> carsDto);
+
+		public partial CarInput CarToCarInput(Car car);
+
+		public partial List<CarInput> CarsToCarInputs(List<Car> car);
+
+		public partial Car CarInputToCar(CarInput carInput);
+
+		public partial List<Car> CarInputsToCars(List<CarInput> carInputs);
 	}
 }

@@ -1,34 +1,33 @@
-﻿using RentalCar.Application.Repository.ModelRepository;
-using RentalCar.Application.Service;
+﻿using RentalCar.Application.Abstractions.Repository.ModelRepository;
+using RentalCar.Application.Abstractions.Service;
 using RentalCar.Domain.Entities;
 
-namespace RentalCar.Persistence.Service
+namespace RentalCar.Persistence.Service;
+
+public class ServiceModelService(IServiceModelRepository _serviceModelRepository) : IServiceModelService
 {
-	public class ServiceModelService(IServiceModelRepository _serviceModelRepository) : IServiceModelService
+	public async Task CreateAsync(ServiceModel service, CancellationToken cancellationToken)
 	{
-		public void Create(ServiceModel service)
-		{
-			_serviceModelRepository.Create(service);
-		}
+		await _serviceModelRepository.CreateAsync(service, cancellationToken);
+	}
 
-		public void Update(ServiceModel service)
-		{
-			_serviceModelRepository.Update(service);
-		}
+	public async Task UpdateAsync(ServiceModel service, CancellationToken cancellationToken)
+	{
+		await _serviceModelRepository.UpdateAsync(service, cancellationToken);
+	}
 
-		public void Delete(ServiceModel service)
-		{
-			_serviceModelRepository.Delete(service);
-		}
+	public async Task DeleteAsync(ServiceModel service, CancellationToken cancellationToken)
+	{
+		await _serviceModelRepository.DeleteAsync(service, cancellationToken);
+	}
 
-		public Task<ServiceModel> Get(int id, CancellationToken cancellationToken)
-		{
-			return _serviceModelRepository.GetAsync(id,cancellationToken);
-		}
+	public Task<ServiceModel> Get(int id, CancellationToken cancellationToken)
+	{
+		return _serviceModelRepository.GetAsync(id,cancellationToken);
+	}
 
-		public Task<List<ServiceModel>> GetAll(CancellationToken cancellationToken)
-		{
-			return _serviceModelRepository.GetAllAsync(cancellationToken);
-		}
+	public Task<List<ServiceModel>> GetAll(CancellationToken cancellationToken)
+	{
+		return _serviceModelRepository.GetAllAsync(cancellationToken);
 	}
 }

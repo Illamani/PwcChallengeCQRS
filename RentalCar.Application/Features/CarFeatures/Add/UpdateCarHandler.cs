@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RentalCar.Application.Repository.ModelRepository;
+using RentalCar.Application.Abstractions.Repository.ModelRepository;
 using RentalCar.Domain.Entities;
 
 namespace RentalCar.Application.Features.CarFeatures.Add

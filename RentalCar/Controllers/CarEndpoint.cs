@@ -3,11 +3,15 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentalCar.Application.Features.CarFeatures.Add;
 using RentalCar.Application.Features.CarFeatures.Get;
+using RentalCar.Domain;
+using RentalCar.Domain.Dto.Car;
 using RentalCar.Domain.Entities;
 
 namespace RentalCar.Api.Controllers;
 public class CarEndpoints : ICarterModule
 {
+    private static readonly CarMapper _mapper = new();
+
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("api/CreateCar", CreateCarAsync);
@@ -34,8 +38,9 @@ public class CarEndpoints : ICarterModule
         builder.MapPut("api/UpdateCar", UpdateCarAsync);
     }
     */
-    public static async Task<IResult> CreateCarAsync([FromBody] Car car, ISender sender, CancellationToken cancellationToken)
+    public static async Task<IResult> CreateCarAsync([FromBody] CarInput carInput, ISender sender, CancellationToken cancellationToken)
     {
+        var car = _mapper.CarInputToCar(carInput);
         var carReturn = await sender.Send(new AddCarRequest(car), cancellationToken);
         return Results.Ok(carReturn);
     }

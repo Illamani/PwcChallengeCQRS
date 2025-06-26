@@ -1,6 +1,3 @@
-﻿namespace RentalCar.Application
-{
-	public class DemoLibraryEntryPointMediatr
-	{
-	}
-}
+﻿namespace RentalCar.Application;
+
+public class DemoLibraryEntryPointMediatr;
