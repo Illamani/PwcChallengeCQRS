@@ -3,12 +3,16 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentalCar.Application.Features.CustomerFeatures.Add;
 using RentalCar.Application.Features.CustomerFeatures.Get;
+using RentalCar.Domain.Dto.Customer;
 using RentalCar.Domain.Entities;
+using RentalCar.Domain.Mapper;
 
 namespace RentalCar.Api.Controllers;
 
 public class CustomerEndpoint : ICarterModule
 {
+    private static readonly CustomerMapper _mapper = new();
+
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("api/CreateCustomer", CreateAsync);
@@ -30,8 +34,13 @@ public class CustomerEndpoint : ICarterModule
         return Results.Ok(customers);
     }
 
-    public static async Task<IResult> CreateAsync([FromBody] Customer customer, ISender sender, CancellationToken cancellationToken)
+    public static async Task<IResult> CreateAsync([FromBody] CustomerInput customerInput, ISender sender, CancellationToken cancellationToken)
     {
+        var customerAdded = await sender.Send(new CheckCustomerAddedRequest(customerInput), cancellationToken);
+        if (customerAdded)
+            return Results.BadRequest("This customer has already been register");
+
+        var customer = _mapper.CustomerInputToCustomer(customerInput);
         var customers = await sender.Send(new AddCustomerRequest(customer),cancellationToken);
         return Results.Ok(customers);
     }

@@ -10,6 +10,7 @@ public sealed class AddCustomerHandler(ICustomerRepository customerRepository) :
 
 	public async Task<Customer> Handle(AddCustomerRequest request, CancellationToken cancellationToken)
 	{
+
 		await _customerRepository.CreateAsync(request.Customer, cancellationToken);
 		return request.Customer;
 	}

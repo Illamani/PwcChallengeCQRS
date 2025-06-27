@@ -7,6 +7,6 @@ public sealed class GetRentalByDateHandler(IRentalRepository rentalRepository) :
 {
 	public async Task<bool> Handle(GetRentalByDateRequest request, CancellationToken cancellationToken)
 	{
-		return await rentalRepository.GetRentalByDateAsync(request.rental, cancellationToken);
+		return await rentalRepository.GetRentalByDateAsync(request.Rental, cancellationToken);
 	}
 }

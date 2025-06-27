@@ -14,7 +14,11 @@ public class RentalRepository(RentalContext _context) : BaseRepository<Rental>(_
 
 	public async Task<bool> GetRentalByDateAsync(Rental rental, CancellationToken cancellationToken)
 	{
-		return await _context.Rentals.AnyAsync(x => x.StartDate > rental.StartDate && x.EndDate < rental.EndDate && x.Car.Id == rental.CarId, cancellationToken);
+		return await _context.Rentals.CountAsync(x =>
+		((rental.StartDate >= x.StartDate && rental.StartDate <= x.EndDate) ||
+		(rental.EndDate >= x.StartDate && rental.EndDate <= x.EndDate) ||
+		(rental.StartDate <= x.StartDate && rental.EndDate >= x.EndDate)) &&
+		x.Car.Id == rental.CarId, cancellationToken) == 0;
 	}
 
 	public async Task RegisterRentalAsync(Rental rental, CancellationToken cancellationToken)

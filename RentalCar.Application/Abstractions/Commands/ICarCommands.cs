@@ -1,6 +1,5 @@
-﻿namespace RentalCar.Application.Abstractions.Commands
+﻿namespace RentalCar.Application.Abstractions.Commands;
+
+public class ICarCommands
 {
-	public class ICarCommands
-	{
-	}
 }

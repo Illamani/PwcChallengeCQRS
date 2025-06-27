@@ -1,9 +1,8 @@
-﻿using RentalCar.Application.Abstractions.Repository;
-using RentalCar.Domain.Entities;
+﻿using RentalCar.Domain.Entities;
 
-namespace RentalCar.Application.Abstractions.Repository.ModelRepository
+namespace RentalCar.Application.Abstractions.Repository.ModelRepository;
+
+public interface ICustomerRepository : IBaseRepository<Customer>
 {
-	public interface ICustomerRepository : IBaseRepository<Customer>
-	{
-	}
+	public Task<bool> CheckCustomerAdded(string FullName, string Address);
 }

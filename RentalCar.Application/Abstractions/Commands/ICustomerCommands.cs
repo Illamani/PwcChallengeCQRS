@@ -1,6 +1,5 @@
-﻿namespace RentalCar.Application.Abstractions.Commands
+﻿namespace RentalCar.Application.Abstractions.Commands;
+
+public interface ICustomerCommands
 {
-	public interface ICustomerCommands
-	{
-	}
 }

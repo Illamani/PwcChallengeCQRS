@@ -1,14 +1,12 @@
-﻿using RentalCar.Application.Abstractions.Repository;
-using RentalCar.Domain.Entities;
+﻿using RentalCar.Domain.Entities;
 
-namespace RentalCar.Application.Abstractions.Repository.ModelRepository
+namespace RentalCar.Application.Abstractions.Repository.ModelRepository;
+
+public interface IRentalRepository : IBaseRepository<Rental>
 {
-	public interface IRentalRepository : IBaseRepository<Rental>
-	{
-		public Task RegisterRentalAsync(Rental rental, CancellationToken cancellationToken);
+	public Task RegisterRentalAsync(Rental rental, CancellationToken cancellationToken);
 
-		public Task<bool> GetRentalByDateAsync(Rental rental, CancellationToken cancellationToken);
+	public Task<bool> GetRentalByDateAsync(Rental rental, CancellationToken cancellationToken);
 
-		public Task<List<Rental>> GetAllWithRelationAsync(CancellationToken cancellationToken);
-	}
+	public Task<List<Rental>> GetAllWithRelationAsync(CancellationToken cancellationToken);
 }

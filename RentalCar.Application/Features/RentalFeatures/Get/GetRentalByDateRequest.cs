@@ -3,4 +3,4 @@ using RentalCar.Domain.Entities;
 
 namespace RentalCar.Application.Features.RentalFeatures.Get;
 
-public sealed record GetRentalByDateRequest(Rental rental) : IRequest<bool>;
+public sealed record GetRentalByDateRequest(Rental Rental) : IRequest<bool>;

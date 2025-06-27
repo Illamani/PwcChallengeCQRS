@@ -1,4 +1,4 @@
-﻿namespace RentalCar.Domain.Dto
+﻿namespace RentalCar.Domain.Dto.Customer
 {
 	public class CustomerDto
 	{

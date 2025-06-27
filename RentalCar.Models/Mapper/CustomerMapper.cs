@@ -1,6 +1,6 @@
 ﻿using Riok.Mapperly.Abstractions;
 using RentalCar.Domain.Entities;
-using RentalCar.Domain.Dto;
+using RentalCar.Domain.Dto.Customer;
 
 namespace RentalCar.Domain.Mapper
 {
@@ -14,5 +14,13 @@ namespace RentalCar.Domain.Mapper
 		public partial CustomerDto CustomerToCustomerDto(Customer customer);
 
 		public partial List<CustomerDto> CustomersToCustomerDtos(List<Customer> customers);
+
+		public partial Customer CustomerInputToCustomer(CustomerInput customerInput);
+
+		public partial List<Customer> CustomerInputsToCustomers(List<CustomerInput> customerInput);
+
+		public partial CustomerInput CustomerToCustomerInput(Customer customer);
+
+		public partial List<CustomerInput> CustomersToCustomerInputs(Customer customer);
 	}
 }
